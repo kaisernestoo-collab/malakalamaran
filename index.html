@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07111f">
+  <title>Malaka Roleplay — Family & Gangster Application</title>
+  <style>
+    :root{--bg:#07111f;--panel:#0d1b2c;--panel2:#10243a;--blue:#42b9ff;--blue2:#1678c8;--text:#edf7ff;--muted:#9bb0c4;--line:#24415b}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(ellipse at 15% 0%,#123457 0,transparent 40%),radial-gradient(ellipse at 90% 20%,#0b2945 0,transparent 35%),var(--bg);font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--text);line-height:1.55}
+    .topline{height:4px;background:linear-gradient(90deg,#1678c8,#65d2ff,#1678c8)}
+    header{padding:24px 5vw 16px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid #183047;background:#07111fd9;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
+    .brand{display:flex;align-items:center;gap:14px}.logo{width:58px;height:58px;border:1px solid #3a9cda;border-radius:15px;background:linear-gradient(145deg,#163a5a,#081624);display:grid;place-items:center;overflow:hidden;box-shadow:0 0 25px #168bd333}
+    .logo img{width:100%;height:100%;object-fit:contain;display:none}.logo .fallback{font-weight:900;color:var(--blue);font-size:21px;letter-spacing:-2px}
+    .brand h1{font-size:16px;margin:0;letter-spacing:1.5px}.brand p{font-size:11px;color:var(--muted);margin:3px 0 0;letter-spacing:2px}
+    nav{display:flex;gap:20px;align-items:center}nav a{color:#c9dced;text-decoration:none;font-size:13px}nav a:hover{color:var(--blue)}
+    .hero{max-width:1120px;margin:0 auto;padding:76px 24px 48px;display:grid;grid-template-columns:1.2fr .8fr;gap:42px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-size:11px;font-weight:800;letter-spacing:2px;border:1px solid #2674a5;padding:8px 12px;border-radius:30px;background:#0d2a41}
+    .dot{width:7px;height:7px;border-radius:50%;background:#54d0ff;box-shadow:0 0 12px #54d0ff}
+    h2{font-size:clamp(36px,5vw,60px);line-height:1.05;margin:22px 0 18px;letter-spacing:-2px}.hero h2 span{color:var(--blue)}
+    .intro{color:#b5c8d9;max-width:600px;font-size:16px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;justify-content:center;align-items:center;padding:13px 18px;border-radius:10px;text-decoration:none;font-weight:800;font-size:13px;border:1px solid var(--line);color:var(--text);cursor:pointer}.btn-primary{background:linear-gradient(135deg,#1988d2,#39b8f5);color:#03111d;border:0;box-shadow:0 8px 26px #168bd333}.btn:hover{transform:translateY(-1px)}
+    .hero-card{border:1px solid #245071;background:linear-gradient(150deg,#102940,#091726);padding:26px;border-radius:22px;box-shadow:0 22px 65px #0005;position:relative;overflow:hidden}.hero-card:before{content:"";position:absolute;width:190px;height:190px;border:1px solid #2b85b644;border-radius:50%;right:-60px;top:-65px;box-shadow:0 0 0 22px #2b85b611,0 0 0 44px #2b85b608}
+    .crest{width:90px;height:90px;margin-bottom:18px;border-radius:22px;background:#071725;border:1px solid #318ac0;display:grid;place-items:center;color:var(--blue);font-size:26px;font-weight:900;letter-spacing:-2px;position:relative;overflow:hidden}.crest img{width:100%;height:100%;object-fit:contain;display:none}
+    .hero-card h3{font-size:21px;margin:0 0 7px}.hero-card>p{color:var(--muted);font-size:13px;margin:0 0 20px}.credit{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid #24415b}.credit span{color:var(--muted);font-size:12px}.credit strong{font-size:13px;text-align:right}
+    .section{max-width:920px;margin:0 auto;padding:35px 24px 80px}.section-heading{text-align:center;margin-bottom:28px}.section-heading .kicker{color:var(--blue);font-size:11px;font-weight:900;letter-spacing:2px}.section-heading h2{font-size:34px;margin:8px 0}.section-heading p{color:var(--muted);margin:0}
+    form{border:1px solid #24435e;background:linear-gradient(145deg,#0e2033,#091624);border-radius:20px;padding:clamp(18px,4vw,34px);box-shadow:0 25px 70px #0003}
+    .form-top{display:flex;justify-content:space-between;gap:15px;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:24px}.form-top h3{margin:0;font-size:19px}.form-top p{margin:3px 0 0;color:var(--muted);font-size:12px}.required{color:var(--blue);font-size:11px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}label{font-size:12px;font-weight:750;color:#d7e7f5}label small{font-weight:400;color:var(--muted)}
+    input,select,textarea{width:100%;padding:13px 14px;border:1px solid #2a4964;border-radius:9px;background:#071522;color:var(--text);font:inherit;font-size:13px;outline:none;transition:border .2s,box-shadow .2s}
+    input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #42b9ff1a}textarea{resize:vertical;min-height:90px}::placeholder{color:#627d94}
+    .subhead{grid-column:1/-1;margin:10px 0 -5px;padding-bottom:9px;border-bottom:1px solid #203b52;color:var(--blue);font-size:12px;font-weight:900;letter-spacing:1.3px;text-transform:uppercase}
+    .submit-row{margin-top:24px;display:flex;flex-direction:column;gap:12px}.submit-row .btn{width:100%;padding:15px}.notice{font-size:11px;color:var(--muted);text-align:center;margin:0}
+    .footer{border-top:1px solid #183047;padding:24px;text-align:center;color:#7792a8;font-size:11px}.footer strong{color:#d9eafa}
+    .toast{display:none;margin-top:14px;padding:12px;border:1px solid #287ca9;background:#0d2a41;border-radius:8px;color:#c9edff;font-size:12px}
+    @media(max-width:760px){header{padding:15px 18px}.brand h1{font-size:13px}nav{gap:12px}nav a:not(.nav-apply){display:none}.hero{grid-template-columns:1fr;padding-top:50px;gap:28px}.hero-card{max-width:500px}.grid{grid-template-columns:1fr}.field.full,.subhead{grid-column:auto}.section{padding-bottom:55px}}
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header>
+    <div class="brand">
+      <div class="logo"><img src="https://cdn.phototourl.com/member/2026-10-25-4e6b45e3-569b-4d25-b8a7-b2da736c956d.jpg" alt="Logo Malaka Roleplay" onload="this.style.display='block';this.nextElementSibling.style.display='none'"><span class="fallback">MK</span></div>
+      <div><h1>MALAKA ROLEPLAY</h1><p>FAMILY & GANGSTER DIVISION</p></div>
+    </div>
+    <nav><a href="#informasi">Informasi</a><a href="#lamaran" class="nav-apply">Formulir Lamaran</a></nav>
+  </header>
+
+  <main>
+    <section class="hero" id="informasi">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> OFFICIAL APPLICATION PORTAL</div>
+        <h2>BANGUN NAMA.<br><span>JAGA SOLIDARITAS.</span></h2>
+        <p class="intro">Ajukan family atau gangster kamu untuk bergabung dan berkembang di dunia <strong>Malaka Roleplay</strong>. Isi formulir dengan lengkap, jelas, dan jujur sebelum mengirimkan lamaran kepada Founder.</p>
+        <div class="actions"><a class="btn btn-primary" href="#lamaran">ISI FORMULIR <span style="margin-left:8px">↗</span></a><a class="btn" href="#lamaran">PERSYARATAN LAMARAN</a></div>
+      </div>
+      <aside class="hero-card">
+        <div class="crest"><img src="https://cdn.phototourl.com/member/2026-10-25-4e6b45e3-569b-4d25-b8a7-b2da736c956d.jpg" alt="Logo kota" onload="this.style.display='block';this.nextElementSibling.style.display='none'"><span>MK</span></div>
+        <h3>Malaka Roleplay</h3>
+        <p>Family & Gangster Recruitment</p>
+        <div class="credit"><span>Developer</span><strong>MatsunaghaTEAM</strong></div>
+        <div class="credit"><span>Founder</span><strong>Ernesto Alejandro Touggnes</strong></div>
+        <div class="credit"><span>Submission</span><strong>WhatsApp Founder</strong></div>
+      </aside>
+    </section>
+
+    <section class="section" id="lamaran">
+      <div class="section-heading">
+        <div class="kicker">RECRUITMENT FORM</div>
+        <h2>Formulir Lamaran</h2>
+        <p>Lengkapi semua bagian yang bertanda wajib (*).</p>
+      </div>
+      <form id="applicationForm">
+        <div class="form-top"><div><h3>Family / Gangster Application</h3><p>Malaka Roleplay • Official Submission</p></div><span class="required">* WAJIB DIISI</span></div>
+        <div class="grid">
+          <div class="subhead">01 — Identitas Lamaran</div>
+          <div class="field"><label for="leader">Leader Area *</label><input id="leader" name="leader" placeholder="Nama karakter leader" required></div>
+          <div class="field"><label for="ooc">Nama OOC *</label><input id="ooc" name="ooc" placeholder="Nama kamu di luar karakter" required></div>
+          <div class="field"><label for="family">Nama Fam *</label><input id="family" name="family" placeholder="Nama family / gangster" required></div>
+          <div class="field"><label for="type">Type *</label><select id="type" name="type" required><option value="">Pilih tipe</option><option>Gangs</option><option>Family</option><option>Bloods</option><option>Cartel</option></select></div>
+
+          <div class="subhead">02 — Visi & Misi</div>
+          <div class="field full"><label>Visi — Sebutkan 5 visi *</label><textarea id="visi" name="visi" placeholder="1.&#10;2.&#10;3.&#10;4.&#10;5." required></textarea></div>
+          <div class="field full"><label>Misi — Sebutkan 5 misi *</label><textarea id="misi" name="misi" placeholder="1.&#10;2.&#10;3.&#10;4.&#10;5." required></textarea></div>
+
+          <div class="subhead">03 — Pemahaman & Pengalaman</div>
+          <div class="field full"><label for="responsibility">Sebutkan apa itu tanggung jawab *</label><textarea id="responsibility" name="responsibility" placeholder="Jelaskan menurut pemahaman kamu..." required></textarea></div>
+          <div class="field full"><label for="example">Sebutkan contoh dari tanggung jawab *</label><textarea id="example" name="example" placeholder="Berikan contoh nyata dalam mengurus family..." required></textarea></div>
+          <div class="field full"><label for="experience">Sudah berapa lama bermain GTA SA-MP? *</label><input id="experience" name="experience" placeholder="Contoh: 2 tahun" required></div>
+
+          <div class="subhead">04 — List Anggota & Komitmen</div>
+          <div class="field full"><label for="members">List anggota *</label><textarea id="members" name="members" placeholder="Tuliskan nama karakter seluruh anggota, satu nama per baris..." required></textarea></div>
+          <div class="field full"><label for="demote">Apakah siap di-demote kalau melakukan kesalahan? *</label><select id="demote" name="demote" required><option value="">Pilih jawaban</option><option>Ya, saya siap menerima konsekuensi sesuai peraturan.</option><option>Tidak</option></select></div>
+        </div>
+        <div class="submit-row">
+          <button class="btn btn-primary" type="submit">KIRIM LAMARAN VIA WHATSAPP ↗</button>
+          <p class="notice">Setelah menekan tombol, WhatsApp akan terbuka dengan isi lamaran yang sudah disusun. Tekan tombol Kirim di WhatsApp untuk mengirimkannya ke Founder.</p>
+          <div class="toast" id="toast" role="status">Jika WhatsApp tidak terbuka, izinkan pop-up atau periksa aplikasi WhatsApp kamu.</div>
+        </div>
+      </form>
+    </section>
+  </main>
+  <footer class="footer">© <span id="year"></span> <strong>MALAKA ROLEPLAY</strong> • Developer: MatsunaghaTEAM • Founder: Ernesto Alejandro Touggnes</footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const form = document.getElementById('applicationForm');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const data = new FormData(form);
+      const get = key => (data.get(key) || '').toString().trim();
+      const message = [
+        '📄 *LAMARAN FAMILY / GANGSTER — MALAKA ROLEPLAY*',
+        '',
+        '*01 — IDENTITAS LAMARAN*',
+        'Leader Area: ' + get('leader'),
+        'Nama OOC: ' + get('ooc'),
+        'Nama Fam: ' + get('family'),
+        'Type: ' + get('type'),
+        '',
+        '*02 — VISI*',
+        get('visi'),
+        '',
+        '*MISI*',
+        get('misi'),
+        '',
+        '*03 — PEMAHAMAN & PENGALAMAN*',
+        'Apa itu tanggung jawab: ' + get('responsibility'),
+        '',
+        'Contoh tanggung jawab: ' + get('example'),
+        '',
+        'Lama bermain GTA SA-MP: ' + get('experience'),
+        '',
+        '*04 — LIST ANGGOTA & KOMITMEN*',
+        'List anggota:',
+        get('members'),
+        '',
+        'Siap di-demote jika melakukan kesalahan: ' + get('demote'),
+        '',
+        'Developer: MatsunaghaTEAM',
+        'Founder: Ernesto Alejandro Touggnes'
+      ].join('\\n');
+      const whatsappUrl = 'https://wa.me/6281400766700?text=' + encodeURIComponent(message);
+      document.getElementById('toast').style.display = 'block';
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    });
+  </script>
+</body>
+</html>
